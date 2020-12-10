@@ -6,6 +6,9 @@ let myData = require('./data/myData')
 // Use express Router object
 let router = express.Router();
 
+//Configure middleware to support JSON data parsing in request object
+app.use(express.json());
+
 // Create GET to return a list of all data
 router.get('/', function (req, res, next) {
     myData.get(function (data) {
@@ -65,6 +68,19 @@ router.get('/:id', function (req, res, next) {
         function (err) {
             next(err);
         });
+});
+
+router.post('/', function (req, res, next) {
+    myData.insert(req.body, function (data) {
+        res.status(201).json({
+            "status": 201,
+            "statusText": "Created",
+            "message": "New data added",
+            "data": data
+        });
+    }, function (err) {
+        next(err);
+    });
 });
 
 

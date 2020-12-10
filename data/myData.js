@@ -41,6 +41,25 @@ let myData = {
             }
         });
     },
+    insert: function(newData, resolve, reject) {
+        fs.readFile(FILE_NAME, function(err, data) {
+            if(err){
+                reject(err);
+            }
+            else {
+                let myData = JSON.parse(data);
+                myData.push(newData);
+                fs.writeFile(FILE_NAME, JSON.stringify(myData), function (err) {
+                    if (err){
+                        reject(err);
+                    }
+                    else {
+                        resolve(myData);
+                    }
+                });
+            }
+        });
+    }
 };
 
 module.exports = myData;
