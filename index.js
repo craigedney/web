@@ -112,6 +112,34 @@ router.put('/:id', function (req, res, next) {
     });
 });
 
+// Create DELETE to delete a single piece of data
+router.delete('/:id', function (req, res, next) {
+    myData.getById(req.params.id, function (data) {
+        if (data) {
+            // Attempt to delete the data
+            myData.delete(req.params.id, function (data) {
+                res.status(200).json({
+                    "status": 200,
+                    "statusText": "OK",
+                    "message": "The data ' " + req.params.id + "' has been deleted",
+                    "data": "Data " + req.params.id + " deleted"
+                });
+            });
+        } else {
+            res.status(404).json({
+                "status": 404,
+                "statusText": "Not Found",
+                "message": "Data '" + req.params.id + "' could not be found",
+                "error": {
+                    "code": "NOT_FOUND",
+                    "message": "The data '" + req.params.id + "'could not be found"
+                }
+            });
+        }
+    }, function (err) {
+        next(err);
+    });
+});
 
 // Configure router so all routes are prefixed with /api/v1
 app.use('/api/', router);
