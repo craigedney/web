@@ -141,6 +141,7 @@ router.delete('/:id', function (req, res, next) {
     });
 });
 
+// Create PATCH to patch a single piece of data
 router.patch('/:id', function (req, res, next) {
         myData.getById(req.params.id, function (data) {
             if (data) {
@@ -171,6 +172,19 @@ router.patch('/:id', function (req, res, next) {
 
 // Configure router so all routes are prefixed with /api/v1
 app.use('/api/', router);
+
+// Configure exception middleware last
+app.use(function(err, req, res, next) {
+    res.status(500).json({
+        "status": 500,
+        "statusText": "Internal Server Error",
+        "message": err.message,
+        "error": {
+            "code": "INTERNAL_SERVER_ERROR",
+            "message": server.message
+        }
+    });
+});
 
 // Create server to listen on port 5000
 const server = app.listen(5000, function () {
