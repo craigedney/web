@@ -20,6 +20,26 @@ router.get('/', function (req, res, next) {
     });
 });
 
+// Create GET/search?id=n&name=str to search for data by 'id' and/or 'name'
+router.get('/search', function (req, res, next) {
+    let searchObject = {
+        "id": req.query.id,
+        "name": req.query.name
+    };
+
+    myData.search(searchObject, function (data) {
+        res.status(200).json({
+            "status": 200,
+            "statusText": "OK",
+            "message": "All data retrieved",
+            "data": data
+        });
+    }, function (err) {
+        next(err);
+    });
+});
+
+
 // Create GET/id to return a single piece of data
 router.get('/:id', function (req, res, next) {
     myData.getById(req.params.id, function (data) {

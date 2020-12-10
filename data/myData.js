@@ -22,7 +22,25 @@ let myData = {
                 resolve(myData);
             }
         });
-    }
+    },
+    search: function(searchObject, resolve, reject){
+        fs.readFile(FILE_NAME, function(err, data){
+            if(err){
+                reject(err);
+            }
+            else {
+                let myData = JSON.parse(data);
+                // Perform Search
+                if (searchObject) {
+                    myData = myData.filter(
+                        d => (searchObject.id ? d.id == searchObject.id : true) &&
+                            (searchObject ? d.name.toLowerCase().indexOf(searchObject.name.toLowerCase()) >= 0 : true)
+                    );
+                }
+                resolve(myData);
+            }
+        });
+    },
 };
 
 module.exports = myData;
