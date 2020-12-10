@@ -12,7 +12,7 @@ let dummyData = [
 
 // Create GET to return a list of all data
 router.get('/', function (req, res, next) {
-    res.send(dummyData);
+    res.status(200).send(dummyData);
 })
 
 // Configure router so all routes are prefixed with /api/v1
