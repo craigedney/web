@@ -4,10 +4,15 @@ let app = express();
 
 // Use express Router object
 let router = express.Router();
+let dummyData = [
+    {"id": 1, "name": "Owen"},
+    {"id": 2, "name": "Alice"},
+    {"id": 3, "name": "Oscar"},
+];
 
 // Create GET to return a list of all data
 router.get('/', function (req, res, next) {
-    res.send("myData");
+    res.send(dummyData);
 })
 
 // Configure router so all routes are prefixed with /api/v1
