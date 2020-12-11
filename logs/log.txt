@@ -1,0 +1,4 @@
+********************************************************************************
+Date/Time: 12/11/2020
+Exception Info: {"status":500,"statusText":"internal server error","message":"ENOENT: no such file or directory, open './file/data.json77'","error":{"errno":-2,"call":"open","code":"INTERNAL_SERVER_ERROR","message":"ENOENT: no such file or directory, open './file/data.json77'"},"requestInfo":{"hostname":"localhost","path":"/api/"}}
+********************************************************************************
