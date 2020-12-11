@@ -3,12 +3,17 @@ let express = require('express');
 let app = express();
 let myData = require('./data/myData')
 let errorHelper = require('./helpers/errorHelpers')
+let cors = require('cors');
 
 // Use express Router object
 let router = express.Router();
 
-//Configure middleware to support JSON data parsing in request object
+// Configure middleware to support JSON data parsing in request object
 app.use(express.json());
+
+// Configure CORS
+app.use(cors());
+
 
 // Create GET to return a list of all data
 router.get('/', function (req, res, next) {
