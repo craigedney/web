@@ -1,5 +1,5 @@
 let fs = require('fs');
-const FILE_NAME = "./file/data.json";
+const FILE_NAME = "./file/data.json77";
 
 let myData = {
     get: function (resolve, reject) {
